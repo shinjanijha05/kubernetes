@@ -1,0 +1,19 @@
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: wordpress
+spec:
+  scaleTargetRef:
+    name:          wordpress         
+  minReplicaCount:  0                               
+  maxReplicaCount:  1                              
+  fallback:                                          # Optional. Section to specify fallback options
+    failureThreshold: 3                              # Mandatory if fallback section is included
+    replicas: 2                                      # Mandatory if fallback section is included
+  triggers:
+  - type: cpu
+    metadata:
+      type: Utilization # Deprecated in favor of trigger.metricType; allowed types are 'Utilization' or 'AverageValue'
+      value: "10"
+      containerName: "wordpress" # Optional. You can use this to target a specific container in a pod
+  
