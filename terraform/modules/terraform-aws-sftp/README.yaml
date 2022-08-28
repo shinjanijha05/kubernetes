@@ -1,0 +1,57 @@
+---
+#
+# This is the canonical configuration for the `README.md`
+# Run `make readme` to rebuild the `README.md`
+#
+
+# Name of this project
+name : Terraform AWS SFTP
+
+# License of this project
+license: "APACHE"
+
+# Canonical GitHub repo
+github_repo: clouddrove/terraform-aws-sftp
+
+# Badges to display
+badges:
+  - name: "Terraform"
+    image: "https://img.shields.io/badge/Terraform-v1.1.7-green"
+    url: "https://www.terraform.io"
+  - name: "Licence"
+    image: "https://img.shields.io/badge/License-APACHE-blue.svg"
+    url: "LICENSE.md"
+  - name: "tfsec"
+    image: "https://github.com/clouddrove/terraform-aws-sftp/actions/workflows/tfsec.yml/badge.svg"
+    url: "https://github.com/clouddrove/terraform-aws-sftp/actions/workflows/tfsec.yml"
+  - name: "static-checks"
+    image: "https://github.com/clouddrove/terraform-aws-sftp/actions/workflows/terraform.yml/badge.svg"
+    url: "https://github.com/clouddrove/terraform-aws-sftp/actions/workflows/terraform.yml"
+
+
+#  description of this project
+description: |-
+  This terraform module is used to create sftp on AWS for S3.
+
+# extra content
+include:
+  - "terraform.md"
+
+# How to use this project
+usage : |-
+  ### Simple Example
+  Here is an example of how you can use this module in your inventory structure:
+  ```hcl
+    module "sftp" {
+          source                    = "clouddrove/sftp/aws"
+          version                   = "0.15.0"
+          name                      = "sftp"
+          environment               = "test"
+          label_order               = ["name", "environment"]
+          key_path                  = "~/.ssh/id_rsa.pub"
+          user_name                 = "ftp-user"
+          enable_sftp               = true
+          s3_bucket_id              = clouddrove_dev_s3_bucket
+          endpoint_type             = "PUBLIC"
+          }
+  ```
